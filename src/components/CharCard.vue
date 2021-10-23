@@ -2,12 +2,12 @@
   <div class="charCard" @dragover.prevent @drop.prevent>
     <div class="canvas" @drop="dragFile" :style="{'padding': border}">
       <div class="container">
-        <panZoom @init="onInit">
+        <panZoom @init="onInit" v-if="image">
           <div class="image">
             <img alt="background" :src="image" :style="{'transform': transform}" />
           </div>
         </panZoom>
-        <Overlay v-if="image" />
+        <Overlay v-if="image" :theme="overlayTheme" />
       </div>
 
       <div class="prompt" v-if="!image">
@@ -16,6 +16,7 @@
       </div>
     </div>
 
+    <button @click="clear">Clear Image</button>
     <button @click="save">Save</button>
   </div>
 </template>
@@ -31,6 +32,13 @@ export default {
     Overlay
   },
 
+  props: {
+    overlayTheme: {
+      default: "default",
+      type: String
+    }
+  },
+
   data() {
     return {
       image: null,
@@ -40,19 +48,33 @@ export default {
   },
 
   methods: {
+    validateImage(file) {
+      let type = file.type;
+      return type === "image/png" || type === "image/jpg" || type === "image/jpeg" || type === "image/webp" || type === "image/gif" || type === "image/bmp"
+    },
+
     onFileChange(e) {
       const file = e.target.files[0];
-      this.image = URL.createObjectURL(file);
+      if(this.validateImage(file)) {
+        this.image = URL.createObjectURL(file);
+      }
     },
 
     dragFile(e) {
-      this.image = URL.createObjectURL(e.dataTransfer.files[0]);
+      let file = e.dataTransfer.files[0];
+      if(this.validateImage(file)) {
+        this.image = URL.createObjectURL(file);
+      }
     },
 
     save() {
       html2canvas(this.$el.querySelector(".canvas")).then(function(canvas) {
         document.body.appendChild(canvas);
       });
+    },
+
+    clear() {
+      this.image = null;
     },
 
     onInit(panzoomInstance) {
@@ -91,6 +113,7 @@ export default {
 
     .image {
       display: table-cell;
+      cursor: move;
     }
 
     .prompt {
@@ -100,6 +123,7 @@ export default {
       right: 10px;
       text-align: center;
       transform: translateY(-50%);
+      color: #000;
     }
   }
 </style>

@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <char-card />
+    <header>
+      Character Card Generator
+    </header>
+    <main>
+      <char-card />
+      <char-controls />
+    </main>
   </div>
 </template>
 
@@ -8,11 +14,38 @@
 // @ is an alias to /src
 
 import CharCard from "@/components/CharCard";
+import CharControls from "@/components/CharControls";
+
 export default {
   name: 'Home',
   components: {
-    CharCard
-
+    CharCard,
+    CharControls
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .home {
+    width: 1000px;
+    max-width: 100%;
+    padding: 20px;
+    margin: auto;
+    background: #888;
+  }
+
+  header {
+    text-align: center;
+    font-size: 200%;
+    margin-bottom: 20px;
+    color: #000;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 0;
+  }
+</style>
