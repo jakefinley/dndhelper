@@ -1,7 +1,7 @@
 <template>
-  <div class="overlay" :class="`theme--${theme}`">
+  <div class="overlay" :class="`theme--${theme}`" :style="{'color': textColor}">
     <header v-if="charName || charClass">
-      <div class="character-meta">
+      <div class="character-meta" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
         <div class="row">
           <div class="gender" v-if="charPronouns">
             <label class="name">Pronouns</label>
@@ -19,21 +19,21 @@
     <main>
       <div class="vitals">
         <div class="row">
-          <div class="stat hp">
+          <div class="stat hp" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
             <label class="name">HP</label>
             <span class="val">{{charHP || 0}}</span>
           </div>
-          <div class="stat dc">
+          <div class="stat dc" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
             <label class="name">DC</label>
             <span class="val">{{charDC || 0}}</span>
           </div>
         </div>
         <div class="row">
-          <div class="stat ac">
+          <div class="stat ac" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
             <label class="name">AC</label>
             <span class="val">{{charAC || 0}}</span>
           </div>
-          <div class="stat pp">
+          <div class="stat pp" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
             <label class="name">PP</label>
             <span class="val">{{charPP || 0}}</span>
           </div>
@@ -42,60 +42,60 @@
     </main>
     <footer>
       <div class="stats">
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">STR</label>
           <span class="mod">{{toMod(charSTR || 0)}}</span>
-          <span class="score">{{charSTR || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charSTR || 0}}</span>
         </div>
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">DEX</label>
           <span class="mod">{{toMod(charDEX || 0)}}</span>
-          <span class="score">{{charDEX || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charDEX || 0}}</span>
         </div>
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">CON</label>
           <span class="mod">{{toMod(charCON || 0)}}</span>
-          <span class="score">{{charCON || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charCON || 0}}</span>
         </div>
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">INT</label>
           <span class="mod">{{toMod(charINT || 0)}}</span>
-          <span class="score">{{charINT || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charINT || 0}}</span>
         </div>
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">WIS</label>
           <span class="mod">{{toMod(charWIS || 0)}}</span>
-          <span class="score">{{charWIS || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charWIS || 0}}</span>
         </div>
-        <div class="ability">
+        <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">CHA</label>
           <span class="mod">{{toMod(charCHA || 0)}}</span>
-          <span class="score">{{charCHA || 0}}</span>
+          <span class="score" :style="{borderColor: borderColor, backgroundColor: overlayColor}">{{charCHA || 0}}</span>
         </div>
       </div>
 
       <div class="saves">
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">STR</label>
           <div class="mod">{{formatMod(charSTRsave || 0)}}</div>
         </div>
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">DEX</label>
           <div class="mod">{{formatMod(charDEXsave || 0)}}</div>
         </div>
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">CON</label>
           <div class="mod">{{formatMod(charCONsave || 0)}}</div>
         </div>
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">INT</label>
           <div class="mod">{{formatMod(charINTsave || 0)}}</div>
         </div>
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">WIS</label>
           <div class="mod">{{formatMod(charWISsave || 0)}}</div>
         </div>
-        <div class="save">
+        <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">CHA</label>
           <div class="mod">{{formatMod(charCHAsave || 0)}}</div>
         </div>
@@ -134,6 +134,10 @@ export default {
       } else {
         return mod;
       }
+    },
+    
+    rgbaToCSS(color) {
+      return `rgba(${color.rgba.r}, ${color.rgba.g}, ${color.rgba.b}, ${color.rgba.a})`;
     }
   },
 
@@ -179,6 +183,18 @@ export default {
 
       charCHAsave: state => state.character.saves.cha,
     }),
+    
+    textColor() {
+      return this.rgbaToCSS(this.$store.state.card.textColor);
+    },
+
+    borderColor() {
+      return this.rgbaToCSS(this.$store.state.card.borderColor);
+    },
+
+    overlayColor() {
+      return this.rgbaToCSS(this.$store.state.card.overlayColor);
+    },
   }
 }
 </script>
@@ -217,7 +233,6 @@ export default {
 
       .character-meta {
         text-align: center;
-        background-color: rgba(0,0,0,.75);
         position: relative;
         display: block;
         justify-content: space-between;
@@ -226,8 +241,7 @@ export default {
         padding: 5px;
         border-bottom-right-radius: 50px;
         border-bottom-left-radius: 50px;
-        box-shadow: 5px 5px 5px rgba(0,0,0,.5);
-        border: 1px solid #435aa4;
+        border: 1px solid;
         border-top: none;
 
         .row {
@@ -242,7 +256,7 @@ export default {
           font-weight: 600;
           font-size: 200%;
           padding: 5px;
-          text-shadow: 0 0 10px rgba(255, 255, 255, .5);
+          //text-shadow: 0 0 10px rgba(255, 255, 255, .5);
           display: block;
           text-align: center;
           grid-column: 2;
@@ -288,15 +302,13 @@ export default {
         align-self: flex-end;
 
         .ability {
-          background-color: rgba(0,0,0,.75);
-          box-shadow: 5px 5px 5px rgba(0,0,0,.5);
           border-radius: 10px;
           display: inline-block;
           width: 60px;
           height: 60px;
           position: relative;
           margin: auto;
-          border: 1px solid #435aa4;
+          border: 1px solid;
 
           .name {
             position: absolute;
@@ -328,13 +340,12 @@ export default {
             position: absolute;
             bottom: 0;
             left: 50%;
-            background-color: rgba(0,0,0,.75);
             box-shadow: 5px 5px 5px rgba(0,0,0,.5);
             padding: 5px;
             border-radius: 50px;
             transform: translate(-50%, 50%);
             margin: auto;
-            border: 1px solid #435aa4;
+            border: 1px solid;
           }
         }
       }
@@ -346,10 +357,8 @@ export default {
         column-gap: 15px;
 
         .save {
-          background-color: rgba(0,0,0,.75);
-          box-shadow: 5px 5px 5px rgba(0,0,0,.5);
           padding: 5px;
-          border: 1px solid #435aa4;
+          border: 1px solid;
           border-radius: 10px;
           display: flex;
           flex-flow: column;
@@ -392,10 +401,8 @@ export default {
         }
 
         .stat {
-          background-color: rgba(0,0,0,.75);
-          box-shadow: 5px 5px 5px rgba(0,0,0,.5);
           padding: 10px;
-          border: 1px solid #435aa4;
+          border: 1px solid;
           border-radius: 10px;
           text-align: center;
           width: 70px;

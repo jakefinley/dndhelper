@@ -27,7 +27,6 @@ export default {
 
 <style scoped lang="scss">
   .home {
-    width: 1000px;
     max-width: 100%;
     padding: 20px;
     margin: auto;
@@ -43,7 +42,7 @@ export default {
 
   main {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 0;

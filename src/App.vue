@@ -32,5 +32,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #FFF;
+  padding: 20px;
 }
 </style>

@@ -1,102 +1,163 @@
 <template>
   <form class="controls">
-    <section class="meta">
-      <label>
-        <span>Character Name:</span>
-        <input type="text" v-model="name" @input="update">
-      </label>
-      <label>
-        <span>Pronouns:</span>
-        <input type="text" v-model="pronouns" @input="update">
-      </label>
-      <label>
-        <span>Race:</span>
-        <input type="text" v-model="race" @input="update">
-      </label>
-      <label>
-        <span>Class(es):</span>
-        <input type="text" v-model="charClass" @input="update">
-      </label>
-    </section>
+    <div class="col">
+      <section class="meta">
+        <header>
+          Character Info
+        </header>
+        <main>
+          <label>
+            <span>Character Name:</span>
+            <input type="text" v-model="name" @input="updateChar">
+          </label>
+          <label>
+            <span>Pronouns:</span>
+            <input type="text" v-model="pronouns" @input="updateChar">
+          </label>
+          <label>
+            <span>Race:</span>
+            <input type="text" v-model="race" @input="updateChar">
+          </label>
+          <label>
+            <span>Class(es):</span>
+            <input type="text" v-model="charClass" @input="updateChar">
+          </label>
+        </main>
+      </section>
 
-    <section class="atts">
-      <label>
-        <span>Health (HP):</span>
-        <input type="number" v-model="hp" @input="update">
-      </label>
-      <label>
-        <span>Armor Class (AC):</span>
-        <input type="number" v-model="ac" @input="update">
-      </label>
-      <label>
-        <span>Spell Save DC:</span>
-        <input type="number" v-model="dc" @input="update">
-      </label>
-      <label>
-        <span>Passive Perception (PP):</span>
-        <input type="number" v-model="pp" @input="update">
-      </label>
-    </section>
+      <section class="atts">
+        <header>
+          Misc Attributes
+        </header>
+        <main>
+          <label>
+            <span>Health (HP):</span>
+            <input type="number" v-model="hp" @input="updateChar">
+          </label>
+          <label>
+            <span>Armor Class (AC):</span>
+            <input type="number" v-model="ac" @input="updateChar">
+          </label>
+          <label>
+            <span>Spell Save DC:</span>
+            <input type="number" v-model="dc" @input="updateChar">
+          </label>
+          <label>
+            <span>Passive Perception (PP):</span>
+            <input type="number" v-model="pp" @input="updateChar">
+          </label>
+        </main>
+      </section>
 
-    <section class="stats">
-      <label>
-        <span>Strength (STR):</span>
-        <input type="number" v-model="str" @input="update">
-      </label>
-      <label>
-        <span>Dexterity (DEX):</span>
-        <input type="number" v-model="dex" @input="update">
-      </label>
-      <label>
-        <span>Constitution (CON):</span>
-        <input type="number" v-model="con" @input="update">
-      </label>
-      <label>
-        <span>Intelligence (INT):</span>
-        <input type="number" v-model="int" @input="update">
-      </label>
-      <label>
-        <span>Wisdom (WIS):</span>
-        <input type="number" v-model="wis" @input="update">
-      </label>
-      <label>
-        <span>Charisma (CHA):</span>
-        <input type="number" v-model="cha" @input="update">
-      </label>
-    </section>
+      <section class="stats">
+        <header>
+          Stats
+        </header>
+        <main>
+          <label>
+            <span>Strength (STR):</span>
+            <input type="number" v-model="str" @input="updateChar">
+          </label>
+          <label>
+            <span>Dexterity (DEX):</span>
+            <input type="number" v-model="dex" @input="updateChar">
+          </label>
+          <label>
+            <span>Constitution (CON):</span>
+            <input type="number" v-model="con" @input="updateChar">
+          </label>
+          <label>
+            <span>Intelligence (INT):</span>
+            <input type="number" v-model="int" @input="updateChar">
+          </label>
+          <label>
+            <span>Wisdom (WIS):</span>
+            <input type="number" v-model="wis" @input="updateChar">
+          </label>
+          <label>
+            <span>Charisma (CHA):</span>
+            <input type="number" v-model="cha" @input="updateChar">
+          </label>
+        </main>
 
-    <section class="saves">
-      <label>
-        <span>STR Save:</span>
-        <input type="number" v-model="strSave" @input="update">
-      </label>
-      <label>
-        <span>DEX Save:</span>
-        <input type="number" v-model="dexSave" @input="update">
-      </label>
-      <label>
-        <span>CON Save:</span>
-        <input type="number" v-model="conSave" @input="update">
-      </label>
-      <label>
-        <span>INT Save:</span>
-        <input type="number" v-model="intSave" @input="update">
-      </label>
-      <label>
-        <span>WIS Save:</span>
-        <input type="number" v-model="wisSave" @input="update">
-      </label>
-      <label>
-        <span>CHA Save:</span>
-        <input type="number" v-model="chaSave" @input="update">
-      </label>
-    </section>
+      </section>
+
+      <section class="saves">
+        <header>Saves</header>
+        <main>
+          <label>
+            <span>STR Save:</span>
+            <input type="number" v-model="strSave" @input="updateChar">
+          </label>
+          <label>
+            <span>DEX Save:</span>
+            <input type="number" v-model="dexSave" @input="updateChar">
+          </label>
+          <label>
+            <span>CON Save:</span>
+            <input type="number" v-model="conSave" @input="updateChar">
+          </label>
+          <label>
+            <span>INT Save:</span>
+            <input type="number" v-model="intSave" @input="updateChar">
+          </label>
+          <label>
+            <span>WIS Save:</span>
+            <input type="number" v-model="wisSave" @input="updateChar">
+          </label>
+          <label>
+            <span>CHA Save:</span>
+            <input type="number" v-model="chaSave" @input="updateChar">
+          </label>
+        </main>
+
+      </section>
+    </div>
+    <div class="col">
+      <section class="card">
+        <header>
+          Card Design
+        </header>
+        <main>
+          <label>
+            <span>Theme:</span>
+            <input type="text" v-model="theme" @input="updateCard">
+          </label>
+          <label>
+            <span>Image Rotation:</span>
+            <input type="number" v-model="rotation" @input="updateCard">
+          </label>
+          <label>
+            <span>Text Color:</span>
+            <chrome-picker v-model="textColor" @input="updateCard" />
+          </label>
+          <label>
+            <span>Border Color:</span>
+            <chrome-picker v-model="borderColor" @input="updateCard" />
+          </label>
+          <label>
+            <span>Overlay Color:</span>
+            <chrome-picker v-model="overlayColor" @input="updateCard" />
+          </label>
+          <label>
+            <span>Background Color (behind image):</span>
+            <chrome-picker v-model="backgroundColor" @input="updateCard" />
+          </label>
+        </main>
+      </section>
+    </div>
   </form>
 </template>
 
 <script>
+import chrome from 'vue-color/src/components/Chrome';
+
 export default {
   name: "CharControls",
+
+  components: {
+    'chrome-picker': chrome
+  },
 
   data() {
     return {
@@ -120,6 +181,12 @@ export default {
       intSave: null,
       wisSave: null,
       chaSave: null,
+      theme: null,
+      textColor: '#000000',
+      borderColor: '#000000',
+      overlayColor: '#000000',
+      backgroundColor: '#000000',
+      rotation: null,
     }
   },
 
@@ -144,11 +211,16 @@ export default {
     this.intSave = this.$store.state.character.saves.int;
     this.wisSave = this.$store.state.character.saves.wis;
     this.chaSave = this.$store.state.character.saves.cha;
+    this.theme = this.$store.state.card.theme;
+    this.textColor = this.$store.state.card.textColor;
+    this.borderColor = this.$store.state.card.borderColor;
+    this.overlayColor = this.$store.state.card.overlayColor;
+    this.backgroundColor = this.$store.state.card.backgroundColor;
+    this.rotation = this.$store.state.card.rotation;
   },
 
   methods: {
-    update(e) {
-      console.log(e);
+    updateChar() {
 
       this.$store.dispatch("character/set", {
         name: this.name,
@@ -178,29 +250,61 @@ export default {
           cha: this.chaSave,
         },
       });
+    },
+
+    updateCard() {
+      this.$store.dispatch("card/setText", this.textColor);
+      this.$store.dispatch("card/setBorder", this.borderColor);
+      this.$store.dispatch("card/setOverlay", this.overlayColor);
+      this.$store.dispatch("card/setBackground", this.backgroundColor);
+      this.$store.dispatch("card/setRotation", this.rotation);
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  section {
+  .controls {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    grid-row-gap: 0;
+  }
+
+  section {
     margin-bottom: 1em;
-    padding: 20px;
     border: 1px solid #000;
     background: #eaeaea;
     color: #000;
     border-radius: 5px;
+    position: relative;
+
+    header {
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      background: #000;
+      color: #FFF;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border: 1px solid #000;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      padding: 20px;
+    }
   }
 
   label {
     text-align: left;
     width: 100%;
+    font-size: 75%;
 
     span {
       display: block;

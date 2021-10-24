@@ -1,7 +1,7 @@
 <template>
   <div class="charCard" @dragover.prevent @drop.prevent>
-    <div class="canvas" @drop="dragFile" :style="{'padding': border}">
-      <div class="container">
+    <div class="canvas" @drop="dragFile" :style="{'padding': border, backgroundColor: borderColor}">
+      <div class="container" :style="{backgroundColor: bgColor}">
         <panZoom @init="onInit" v-if="image">
           <div class="image">
             <img alt="background" :src="image" :style="{'transform': transform}" />
@@ -43,7 +43,6 @@ export default {
     return {
       image: null,
       padding: 10,
-      rotation: 0,
     };
   },
 
@@ -79,6 +78,10 @@ export default {
 
     onInit(panzoomInstance) {
       panzoomInstance.setTransformOrigin(null);
+    },
+
+    rgbToCSS(color) {
+      return `rgb(${color.rgba.r}, ${color.rgba.g}, ${color.rgba.b})`;
     }
   },
 
@@ -87,9 +90,17 @@ export default {
       return `${this.padding}px`;
     },
 
+    borderColor() {
+      return this.rgbToCSS(this.$store.state.card.borderColor);
+    },
+
     transform() {
-      return `rotate(${this.rotation}deg)`;
-    }
+      return `rotate(${this.$store.state.card.rotation}deg)`;
+    },
+
+    bgColor() {
+      return this.rgbToCSS(this.$store.state.card.backgroundColor);
+    },
   }
 }
 </script>

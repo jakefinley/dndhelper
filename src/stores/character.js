@@ -27,7 +27,7 @@ const initial = {
     }
 };
 
-const characterModule = {
+export default {
     namespaced: true,
 
     state: initial,
@@ -58,4 +58,3 @@ const characterModule = {
     }
 };
 
-export {characterModule};
