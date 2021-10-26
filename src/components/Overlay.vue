@@ -110,13 +110,6 @@ import {mapState} from 'vuex';
 export default {
   name: "Overlay",
 
-  props: {
-    theme: {
-      type: String,
-      default: "default"
-    },
-  },
-
   data() {
     return {
 
@@ -142,48 +135,52 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      charName: state => state.character.name,
+    ...mapState("character", {
+      charName: state => state.name,
 
-      charPronouns: state => state.character.pronouns,
+      charPronouns: state => state.pronouns,
 
-      charRace: state => state.character.race,
+      charRace: state => state.race,
 
-      charClass: state => state.character.class,
+      charClass: state => state.class,
 
-      charHP: state => state.character.hp,
+      charHP: state => state.hp,
 
-      charAC: state => state.character.ac,
+      charAC: state => state.ac,
 
-      charDC: state => state.character.dc,
+      charDC: state => state.dc,
 
-      charPP: state => state.character.pp,
+      charPP: state => state.pp,
 
-      charSTR: state => state.character.stats.str,
+      charSTR: state => state.stats.str,
 
-      charDEX: state => state.character.stats.dex,
+      charDEX: state => state.stats.dex,
 
-      charCON: state => state.character.stats.con,
+      charCON: state => state.stats.con,
 
-      charINT: state => state.character.stats.int,
+      charINT: state => state.stats.int,
 
-      charWIS: state => state.character.stats.wis,
+      charWIS: state => state.stats.wis,
 
-      charCHA: state => state.character.stats.cha,
+      charCHA: state => state.stats.cha,
 
-      charSTRsave: state => state.character.saves.str,
+      charSTRsave: state => state.saves.str,
 
-      charDEXsave: state => state.character.saves.dex,
+      charDEXsave: state => state.saves.dex,
 
-      charCONsave: state => state.character.saves.con,
+      charCONsave: state => state.saves.con,
 
-      charINTsave: state => state.character.saves.int,
+      charINTsave: state => state.saves.int,
 
-      charWISsave: state => state.character.saves.wis,
+      charWISsave: state => state.saves.wis,
 
-      charCHAsave: state => state.character.saves.cha,
+      charCHAsave: state => state.saves.cha,
     }),
-    
+
+    theme() {
+      return this.$store.state.card.theme;
+    },
+
     textColor() {
       return this.rgbaToCSS(this.$store.state.card.textColor);
     },

@@ -7,7 +7,7 @@
             <img alt="background" :src="image" :style="{'transform': transform}" />
           </div>
         </panZoom>
-        <Overlay v-if="image" :theme="overlayTheme" />
+        <overlay v-if="image" />
       </div>
 
       <div class="prompt" v-if="!image">
@@ -30,13 +30,6 @@ export default {
 
   components: {
     Overlay
-  },
-
-  props: {
-    overlayTheme: {
-      default: "default",
-      type: String
-    }
   },
 
   data() {

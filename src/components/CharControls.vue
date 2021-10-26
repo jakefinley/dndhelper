@@ -121,7 +121,9 @@
         <main>
           <label>
             <span>Theme:</span>
-            <input type="text" v-model="theme" @input="updateCard">
+            <select v-model="theme" @input="updateCard">
+              <option value="default">Default</option>
+            </select>
           </label>
           <label>
             <span>Image Rotation:</span>
@@ -311,7 +313,7 @@ export default {
     }
   }
 
-  input {
+  input, select {
     width: 100%;
   }
 </style>

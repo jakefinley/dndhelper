@@ -33,5 +33,11 @@ body {
   text-align: center;
   color: #FFF;
   padding: 20px;
+
+  // Fixes an issue with small images in the pan window
+  .vue-pan-zoom-item,
+  .vue-pan-zoom-scene {
+      min-height: 730px;
+  }
 }
 </style>
