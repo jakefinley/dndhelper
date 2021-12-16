@@ -9,7 +9,7 @@ export default {
         },
 
         borderColor: {
-            rgba: { r: 255, g: 0, b: 0, a: 1 },
+            rgba: { r: 0, g: 0, b: 0, a: 1 },
         },
 
         overlayColor: {
@@ -20,16 +20,32 @@ export default {
             rgba: { r: 255, g: 255, b: 255, a: 1 },
         },
 
-        rotation: 0
+        rotation: 0,
+
+        borderSize: 20,
+
+        visibility: {
+            atts: true,
+            stats: true,
+            saves: true
+        }
     },
 
     mutations: {
+        setTheme(state, payload) {
+            state.theme = payload;
+        },
+
         setText(state, payload) {
             state.textColor = payload;
         },
 
-        setBorder(state, payload) {
+        setBorderColor(state, payload) {
             state.borderColor = payload;
+        },
+
+        setBorderSize(state, payload) {
+            state.borderSize = payload;
         },
 
         setOverlay(state, payload) {
@@ -42,16 +58,28 @@ export default {
 
         setRotation(state, payload) {
             state.rotation = payload;
+        },
+
+        setVisibility(state, payload) {
+            state.visibility = payload;
         }
     },
 
     actions: {
+        setTheme({commit}, payload) {
+            commit("setTheme", payload);
+        },
+
         setText({commit}, payload) {
             commit("setText", payload);
         },
 
-        setBorder({commit}, payload) {
-            commit("setBorder", payload);
+        setBorderColor({commit}, payload) {
+            commit("setBorderColor", payload);
+        },
+
+        setBorderSize({commit}, payload) {
+            commit("setBorderSize", payload);
         },
 
         setOverlay({commit}, payload) {
@@ -64,6 +92,10 @@ export default {
 
         setRotation({commit}, payload) {
             commit("setRotation", payload);
+        },
+
+        setVisibility({commit}, payload) {
+            commit("setVisibility", payload);
         }
     }
 }

@@ -17,7 +17,7 @@
       </div>
     </header>
     <main>
-      <div class="vitals">
+      <div class="vitals" v-if="showVitals">
         <div class="row">
           <div class="stat hp" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
             <label class="name">HP</label>
@@ -41,7 +41,7 @@
       </div>
     </main>
     <footer>
-      <div class="stats">
+      <div class="stats" v-if="showStats">
         <div class="ability" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">STR</label>
           <span class="mod">{{toMod(charSTR || 0)}}</span>
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div class="saves">
+      <div class="saves" v-if="showSaves">
         <div class="save" :style="{borderColor: borderColor, backgroundColor: overlayColor}">
           <label class="name">STR</label>
           <div class="mod">{{formatMod(charSTRsave || 0)}}</div>
@@ -175,6 +175,12 @@ export default {
       charWISsave: state => state.saves.wis,
 
       charCHAsave: state => state.saves.cha,
+    }),
+
+    ...mapState("card", {
+      showVitals: state => state.visibility.atts,
+      showStats: state => state.visibility.stats,
+      showSaves: state => state.visibility.saves
     }),
 
     theme() {

@@ -1,6 +1,6 @@
 <template>
   <div class="charCard" @dragover.prevent @drop.prevent>
-    <div class="canvas" @drop="dragFile" :style="{'padding': border, backgroundColor: borderColor}">
+    <div class="canvas" @drop="dragFile" :style="{'padding': borderSize, backgroundColor: borderColor}">
       <div class="container" :style="{backgroundColor: bgColor}">
         <panZoom @init="onInit" v-if="image">
           <div class="image">
@@ -35,7 +35,6 @@ export default {
   data() {
     return {
       image: null,
-      padding: 10,
     };
   },
 
@@ -75,13 +74,14 @@ export default {
 
     rgbToCSS(color) {
       return `rgb(${color.rgba.r}, ${color.rgba.g}, ${color.rgba.b})`;
+    },
+
+    toPx(val) {
+      return `${val}px`;
     }
   },
 
   computed: {
-    border() {
-      return `${this.padding}px`;
-    },
 
     borderColor() {
       return this.rgbToCSS(this.$store.state.card.borderColor);
@@ -94,6 +94,10 @@ export default {
     bgColor() {
       return this.rgbToCSS(this.$store.state.card.backgroundColor);
     },
+
+    borderSize() {
+      return this.toPx(this.$store.state.card.borderSize);
+    }
   }
 }
 </script>
@@ -102,8 +106,8 @@ export default {
   .charCard {
 
     .canvas {
-      width: 400px;
-      height: 730px;
+      width: 750px;
+      height: 1050px;
       background: #eaeaea;
       position: relative;
     }

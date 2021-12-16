@@ -27,9 +27,12 @@
 
       <section class="atts">
         <header>
-          Misc Attributes
+          <label>
+            <span>Misc Attributes</span>
+            <input type="checkbox" v-model="showMiscAtts" @change="updateCard">
+          </label>
         </header>
-        <main>
+        <main v-if="showMiscAtts">
           <label>
             <span>Health (HP):</span>
             <input type="number" v-model="hp" @input="updateChar">
@@ -51,9 +54,12 @@
 
       <section class="stats">
         <header>
-          Stats
+          <label>
+            <span>Stats</span>
+            <input type="checkbox" v-model="showStats" @change="updateCard">
+          </label>
         </header>
-        <main>
+        <main v-if="showStats">
           <label>
             <span>Strength (STR):</span>
             <input type="number" v-model="str" @input="updateChar">
@@ -83,8 +89,13 @@
       </section>
 
       <section class="saves">
-        <header>Saves</header>
-        <main>
+        <header>
+          <label>
+            <span>Saves</span>
+            <input type="checkbox" v-model="showSaves" @change="updateCard">
+          </label>
+        </header>
+        <main v-if="showSaves">
           <label>
             <span>STR Save:</span>
             <input type="number" v-model="strSave" @input="updateChar">
@@ -119,7 +130,7 @@
           Card Design
         </header>
         <main>
-          <label>
+          <label class="full">
             <span>Theme:</span>
             <select v-model="theme" @input="updateCard">
               <option value="default">Default</option>
@@ -128,6 +139,10 @@
           <label>
             <span>Image Rotation:</span>
             <input type="number" v-model="rotation" @input="updateCard">
+          </label>
+          <label>
+            <span>Card Border Size:</span>
+            <input type="number" min="0" max="30" v-model="border" @input="updateCard">
           </label>
           <label>
             <span>Text Color:</span>
@@ -167,6 +182,9 @@ export default {
       pronouns: null,
       race: null,
       charClass: null,
+      showMiscAtts: true,
+      showStats: true,
+      showSaves: true,
       hp: null,
       ac: null,
       dc: null,
@@ -189,6 +207,7 @@ export default {
       overlayColor: '#000000',
       backgroundColor: '#000000',
       rotation: null,
+      border: null
     }
   },
 
@@ -219,6 +238,10 @@ export default {
     this.overlayColor = this.$store.state.card.overlayColor;
     this.backgroundColor = this.$store.state.card.backgroundColor;
     this.rotation = this.$store.state.card.rotation;
+    this.border = this.$store.state.card.borderSize;
+    this.showMiscAtts = this.$store.state.card.visibility.atts;
+    this.showStats = this.$store.state.card.visibility.stats;
+    this.showSaves = this.$store.state.card.visibility.saves;
   },
 
   methods: {
@@ -255,11 +278,18 @@ export default {
     },
 
     updateCard() {
+      this.$store.dispatch("card/setTheme", this.theme);
       this.$store.dispatch("card/setText", this.textColor);
-      this.$store.dispatch("card/setBorder", this.borderColor);
+      this.$store.dispatch("card/setBorderColor", this.borderColor);
+      this.$store.dispatch("card/setBorderSize", this.border);
       this.$store.dispatch("card/setOverlay", this.overlayColor);
       this.$store.dispatch("card/setBackground", this.backgroundColor);
       this.$store.dispatch("card/setRotation", this.rotation);
+      this.$store.dispatch("card/setVisibility", {
+        atts: this.showMiscAtts,
+        stats: this.showStats,
+        saves: this.showSaves
+      });
     }
   }
 }
@@ -283,7 +313,7 @@ export default {
     position: relative;
 
     header {
-      text-align: center;
+      text-align: left;
       font-weight: bold;
       text-transform: uppercase;
       background: #000;
@@ -291,6 +321,15 @@ export default {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border: 1px solid #000;
+      position: relative;
+      padding: 0 10px;
+
+      label {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     main {
@@ -300,20 +339,26 @@ export default {
       grid-column-gap: 10px;
       grid-row-gap: 10px;
       padding: 20px;
+
+      label {
+        text-align: left;
+        width: 100%;
+        font-size: 75%;
+
+        &.full {
+          grid-column-start: 1;
+          grid-column-end: 3;
+        }
+
+        span {
+          display: block;
+        }
+      }
+
+      input, select {
+        width: 100%;
+      }
     }
   }
 
-  label {
-    text-align: left;
-    width: 100%;
-    font-size: 75%;
-
-    span {
-      display: block;
-    }
-  }
-
-  input, select {
-    width: 100%;
-  }
 </style>
